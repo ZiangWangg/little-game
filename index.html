@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #countDisplay {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #clickButton {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #clickButton:hover {
+            background-color: #45a049;
+        }
+
+        #movingImage {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateX(-100%);
+            transition: transform 2s linear;
+        }
+
+        img{
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Hey, now that you are here, don’t leave in a hurry. Please click this button.</h1>
+        <p id="countDisplay">Count: <span id="count">0</span></p>
+        <button id="clickButton" onclick="incrementCount()">Click me!</button>
+        <img id="movingImage" src="./thanks.png" alt="Moving Image">
+    </div>
+
+    <script>
+        var count = 0;
+
+        function incrementCount() {
+            count++;
+            document.getElementById("count").innerText = count;
+
+            // Move the image from left to right when the button is clicked
+            moveImage();
+        }
+
+        function moveImage() {
+            var image = document.getElementById("movingImage");
+
+            // Reset the position of the image before starting the animation
+            image.style.transform = "translateX(-100%)";
+
+            // Trigger reflow to restart the animation
+            void image.offsetWidth;
+
+            // Move the image from left to right
+            image.style.transform = "translateX(100%)";
+
+            // After the animation is complete, reset the image position
+            setTimeout(function () {
+                image.style.transform = "translateX(-100%)";
+            }, 2000); // Adjust the timeout based on your animation duration
+        }
+    </script>
+
+</body>
+</html>
